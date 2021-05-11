@@ -12,13 +12,6 @@ from pandas import read_csv
 
 import tmdbsimple as tmdb
 tmdb.API_KEY='c4c3cb40b87c5d67f381e5bbdc3763ca'
-#search = tmdb.Search()
-#Userinput=input('Enter first movie name:')
-#response = search.movie(query=Userinput)
-#Userinput2=input('Enter Second movie name:')
-#response = search.movie(query=Userinput2)
-#for s in (search.results):
-# print(s['title'], s['popularity'])
 #
 #cal_start_date_str = '2014-12-11'
 #cal_end_date_str = '2014-12-12'
