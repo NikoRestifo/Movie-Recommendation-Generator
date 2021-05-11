@@ -23,11 +23,12 @@ tmdb.API_KEY='c4c3cb40b87c5d67f381e5bbdc3763ca'
 #cal_start_date_str = '2014-12-11'
 #cal_end_date_str = '2014-12-12'
 discover = tmdb.Discover()
+
 results = discover.movie(
-    with_keywords = input("please select")
-#    release_date_gte=cal_start_date_str,
-#    release_date_lte=cal_end_date_str,
-#    sort_by="release_date.asc",
+#    with_keywords = input("please select")
+    release_date_gte=cal_start_date_str,
+    release_date_lte=cal_end_date_str,
+    sort_by="release_date.asc",
 )
 #
 for movie in results["results"]:
@@ -37,8 +38,9 @@ for movie in results["results"]:
     print(movie["release_date"])
     # Get the release dates for the movie
     response = tmdb.movies.Movies(movie["id"]).release_dates()
-    results = response["results"][0]
-    release_dates = results["release_dates"]
+    results = response["results"]
+    for result in results:
+        release_dates = result["release_dates"]
 
     for release in release_dates:
         print("-" * 40)
