@@ -1,4 +1,1 @@
 tmdbsimple
-tmdb3
-
-os
