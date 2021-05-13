@@ -4,7 +4,7 @@ import os
 import datetime
 import seaborn as sns
 import matplotlib.pyplot as plt
-
+import random
 from dotenv import load_dotenv
 import requests
 from pandas import read_csv

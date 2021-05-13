@@ -2,6 +2,7 @@ import tmdbsimple as tmdb
 import csv
 import json
 import os
+import random
 
 tmdb.API_KEY='c4c3cb40b87c5d67f381e5bbdc3763ca'
 
@@ -20,10 +21,19 @@ for page_number in page_numbers:
         values.append(id)
         #print(value['id'])
 
+    movie_list = []
+
     for value in values:
         movie = tmdb.Movies(value)
         response = movie.info()  
         runtime = movie.runtime
         title = movie.title
-        print(title)
-        print(runtime)
+        movie_list.append(title)
+
+n = 0
+while n<3:
+    movie_choice = random.choice(movie_list)
+    print(movie_choice)
+    movie_list.remove(movie_choice)
+    n = n+1
+
