@@ -36,4 +36,3 @@ while n<3:
     print(movie_choice)
     movie_list.remove(movie_choice)
     n = n+1
-
