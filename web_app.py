@@ -1,46 +1,23 @@
-import csv
-import json
-import os
-import datetime
-import seaborn as sns
-import matplotlib.pyplot as plt
-import random
-from dotenv import load_dotenv
-import requests
-from pandas import read_csv
+from typing import Sequence
+from genre_codes import genre_codes
+
+ids_list = []
+
+genre_select = genre_codes['genres']
+for genre in genre_select:
+    if genre['name'] == "Western":
+        genre_id = genre['id']
+        numbas.append(genre_id)
+        break
+if not ids_list:
+    genre_id = None
+
+print(genre_id)
 
 
-import tmdbsimple as tmdb
-tmdb.API_KEY='c4c3cb40b87c5d67f381e5bbdc3763ca'
+#for numba in numbas:
+#    if numba != None:
+#        print(numba)
 #
-#cal_start_date_str = '2014-12-11'
-#cal_end_date_str = '2014-12-12'
-discover = tmdb.Discover()
+#        break
 
-results = discover.movie(
-#    with_keywords = input("please select")
-    release_date_gte=cal_start_date_str,
-    release_date_lte=cal_end_date_str,
-    sort_by="release_date.asc",
-)
-#
-for movie in results["results"]:
-    print("=" * 40)
-    print(movie["title"])
-    print(movie["id"])
-    print(movie["release_date"])
-    # Get the release dates for the movie
-    response = tmdb.movies.Movies(movie["id"]).release_dates()
-    results = response["results"]
-    for result in results:
-        release_dates = result["release_dates"]
-
-    for release in release_dates:
-        print("-" * 40)
-        print(f"release: {release}")
-        release_date_string = release["release_date"]
-        print(f"release_date_string: {release_date_string}")
-        # Check if this release date is in the range specified
-        release_datetime_begin = datetime.datetime.strptime(release["release_date"], "%Y-%m-%dT00:00:00.000Z")
-        release_date_begin = release_datetime_begin.date()
-        print(f"release_date_begin: {release_date_begin}")
