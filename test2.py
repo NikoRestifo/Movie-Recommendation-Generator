@@ -50,4 +50,3 @@ for single_movie in movies_list:
         print(genre['name'])
     print("\n")
         
-
