@@ -95,7 +95,6 @@ def format_runtime_min(pick_runtime_min):
 
 runtime_min = format_runtime_min(pick_runtime_min)
 
-
 def format_runtime_max(pick_runtime_max):
     if bool(pick_runtime_max) == True:
         runtime_max = int(pick_runtime_max)
@@ -128,81 +127,80 @@ def genre_string_to_id():
 
 genre_number=genre_string_to_id()
 
-
 page_numbers = []
 
-p = 1
-while p<100:
-    page_numbers.append(p)
-    p = p + 1
+def run_API(movie_year_min, vote_average, runtime_min, runtime_max, movie_certification, genre_number, USER_NAME):
+    p = 1
+    while p<100:
+        page_numbers.append(p)
+        p = p + 1
 
-discover = tmdb.Discover()
-movie_ids = []
-for page_number in page_numbers:
-    response = discover.movie(sort_by="popularity.desc", with_genres=genre_number, vote_average_gte=vote_average, 
-    primary_release_year=None, primary_release_date_gte=movie_year_min, with_runtime_gte=runtime_min, with_runtime_lte=runtime_max, 
-    certification_country="US", certification=movie_certification, page=page_number)
-    for value in response['results']:
-        id = value['id']
-        movie_ids.append(id)
-    
-movies_list = []
+    discover = tmdb.Discover()
+    movie_ids = []
+    for page_number in page_numbers:
+        response = discover.movie(sort_by="popularity.desc", with_genres=genre_number, vote_average_gte=vote_average, 
+        primary_release_year=None, primary_release_date_gte=movie_year_min, with_runtime_gte=runtime_min, with_runtime_lte=runtime_max, 
+        certification_country="US", certification=movie_certification, page=page_number)
+        for value in response['results']:
+            id = value['id']
+            movie_ids.append(id)
+        
+    movies_list = []
 
-n = 0
-while n<3:
-    movie_choice = random.choice(movie_ids)
-    movies_list.append(movie_choice)
-    movie_ids.remove(movie_choice)
-    n = n+1
+    n = 0
+    while n<3:
+        movie_choice = random.choice(movie_ids)
+        movies_list.append(movie_choice)
+        movie_ids.remove(movie_choice)
+        n = n+1
 
-todays_date = date.today().strftime('%A, %B %d, %Y')
-html = ""
-html += f"<h3>Good Morning, {USER_NAME}!</h3>"
-html += "<h4>Today's Date</h4>"
-html += f"<p>{todays_date}</p>"
-html += f"<h4>Todays Movie Recomendations:</h4>"
+    todays_date = date.today().strftime('%A, %B %d, %Y')
+    html = ""
+    html += f"<h3>Good Morning, {USER_NAME}!</h3>"
+    html += "<h4>Today's Date</h4>"
+    html += f"<p>{todays_date}</p>"
+    html += f"<h4>Todays Movie Recomendations:</h4>"
 
-for single_movie in movies_list:
-    movie = tmdb.Movies(single_movie)
-    response = movie.info()  
-    title = movie.title
-    plot = movie.overview
-    runtime = movie.runtime
-    year = movie.release_date
-    score = movie.vote_average
-    genres = movie.genres
-    poster = movie.poster_path
+    for single_movie in movies_list:
+        movie = tmdb.Movies(single_movie)
+        response = movie.info()  
+        title = movie.title
+        plot = movie.overview
+        runtime = movie.runtime
+        year = movie.release_date
+        score = movie.vote_average
+        genres = movie.genres
+        poster = movie.poster_path
 
-    print("Movie Name: " + str(title) + '\n')
-    print("Additional Information")
-    print("Overview: " + str(plot))
-    print("Length: " + str(runtime) + " minutes")
-    print("Release Date: " + str(year))
-    print("Movie Rating: " + str(score) + "/10\n")
-    print("Genre(s):")
-    for genre in genres:
-        print(genre['name'])
-    print("\n")
-
-    
-    html += "<ul>"
-    html += f"<img src='https://image.tmdb.org/t/p/original/{poster}' alt='Movie Poster' width='500' height='600'>"
-    html += f"<h3>Movie Name: {title} <h2>"
-    html += f"<h4>Additional Information<h4>"
-    html += f"<p>Overview: {plot}<p>"
-    html += f"<p>Length: {runtime} minutes<p>"
-    html += f"<p>Release Date: {year}<p>"
-    html += f"<p>Movie Rating: {score}/10 <p>"
-    html += f"<h4>Genre(s):<h4>"
-    for genre in genres:
-        html += f"<li> {genre['name']}</li>"
-    html += "</ul>"
-
-send_email(subject="[Daily Briefing] Movie Time", html=html, recipient_address=RECIEVE_ADDRESS)
+        print("Movie Name: " + str(title) + '\n')
+        print("Additional Information")
+        print("Overview: " + str(plot))
+        print("Length: " + str(runtime) + " minutes")
+        print("Release Date: " + str(year))
+        print("Movie Rating: " + str(score) + "/10\n")
+        print("Genre(s):")
+        for genre in genres:
+            print(genre['name'])
+        print("\n")
 
         
+        html += "<ul>"
+        html += f"<img src='https://image.tmdb.org/t/p/original/{poster}' alt='Movie Poster' width='500' height='600'>"
+        html += f"<h3>Movie Name: {title} <h2>"
+        html += f"<h4>Additional Information<h4>"
+        html += f"<p>Overview: {plot}<p>"
+        html += f"<p>Length: {runtime} minutes<p>"
+        html += f"<p>Release Date: {year}<p>"
+        html += f"<p>Movie Rating: {score}/10 <p>"
+        html += f"<h4>Genre(s):<h4>"
+        for genre in genres:
+            html += f"<li> {genre['name']}</li>"
+        html += "</ul>"
 
-# app/email_service.py
+    send_email(subject="[Daily Briefing] Movie Time", html=html, recipient_address=RECIEVE_ADDRESS)
+
+run_API(movie_year_min, vote_average, runtime_min, runtime_max, movie_certification, genre_number, USER_NAME)
+
 
 
 
