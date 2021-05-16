@@ -1,16 +1,21 @@
 
+import os
 from flask import Flask
 
-from web_app.routes.email import email
-from web_app.routes.main import main
-from web_app.routes.movie import movie
+from web_app.routes.email_routes import email_routes
+from web_app.routes.main_routes import main_routes
+from web_app.routes.movie_routes import movie_routes
+
+load_dotenv()
+
+#SECRET_KEY = os.getenv("SECRET_KEY", default="super secret") # set this to something else on production!!!
 
 def create_app():
     app = Flask(__name__)
-    app.config["APP_ENV"] = APP_ENV
-    app.register_blueprint(email)
-    app.register_blueprint(main)
-    app.register_blueprint(movie)
+ #   app.config["SECRET_KEY"] = SECRET_KEY
+    app.register_blueprint(email_routes)
+    app.register_blueprint(main_routes)
+    app.register_blueprint(movie_routes)
     return app
 
 if __name__ == "__main__":
