@@ -2,5 +2,5 @@
 
 Sends you a customized email with movie suggestions based on your preferences!
 
-![](screenshot.png)
+![](images/screenshot.png)
 
