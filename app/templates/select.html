@@ -1,0 +1,49 @@
+{% extends "bootstrap_layout.html" %}
+{% set active_page = 'weather_forecast' %}
+
+{% block content %}
+
+    <h2>Movie Preferences</h2>
+
+    <p>Please input the key characteristics you would like your movie to have.</p>
+
+    <label for="genres">Choose a genre:</label>
+
+    <select name="genres" id="genres">
+      <option value="volvo">Volvo</option>
+      <option value="28">Action</option>
+      <option value="12">Adventure</option>
+      <option value="16">Animation</option>
+      <option value="35">Comedy</option>
+      <option value="80">Crime</option>
+      <option value="99">Documentary</option>
+      <option value="18">Drama</option>
+      <option value="10751">Family</option>
+      <option value="14">Fantasy</option>
+      <option value="36">History</option>
+      <option value="27">Horror</option>
+      <option value="10402">Music</option>
+      <option value="9648">Mystery</option>
+      <option value="10749">Romance</option>
+      <option value="878">Science Fiction</option>
+      <option value="10770">TV Movie</option>
+      <option value="53">Thriller</option>
+      <option value="10752">War</option>
+      <option value="37">Western</option> 
+    </select>
+    genre_codes = {"genres":[{"id":28,"name":"Action"},
+   
+    <form action="/weather/forecast" method="POST">
+
+        <label>Country Code:</label>
+        <input type="text" name="country_code" placeholder="US" value="US">
+        <br>
+
+        <label>Zip Code:</label>
+        <input type="text" name="zip_code" placeholder="20057" value="20057">
+        <br>
+
+        <button>Submit</button>
+    </form>
+
+{% endblock %}
