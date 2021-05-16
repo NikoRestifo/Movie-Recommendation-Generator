@@ -7,8 +7,41 @@ import random
 from app import APP_ENV
 from genre_codes import genre_codes
 
+
+import os
+from dotenv import load_dotenv
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+from datetime import date
+
+
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
+SENDER_EMAIL_ADDRESS = os.getenv("SENDER_EMAIL_ADDRESS")
+USER_NAME = os.getenv("USER_NAME", default="Player 1")
+
 load_dotenv()
 
+def send_email(subject="[Daily Briefing] This is a test", html="<p>Hello World</p>", recipient_address=SENDER_EMAIL_ADDRESS):
+    """
+    Sends an email with the specified subject and html contents to the specified recipient,
+
+    If recipient is not specified, sends to the admin's sender address by default.
+    """
+    client = SendGridAPIClient(SENDGRID_API_KEY) #> <class 'sendgrid.sendgrid.SendGridAPIClient>
+    print("CLIENT:", type(client))
+    print("SUBJECT:", subject)
+    #print("HTML:", html)
+
+    message = Mail(from_email=SENDER_EMAIL_ADDRESS, to_emails=recipient_address, subject=subject, html_content=html)
+    try:
+        response = client.send(message)
+        print("RESPONSE:", type(response)) #> <class 'python_http_client.client.Response'>
+        print(response.status_code) #> 202 indicates SUCCESS
+        return response
+    except Exception as e:
+        print("OOPS", type(e), e.message)
+        return None
+    
 tmdb.API_KEY='c4c3cb40b87c5d67f381e5bbdc3763ca'
 
 #Genre = os.getenv("COUNTRY_CODE", default="US")
@@ -105,6 +138,13 @@ while n<3:
     movie_ids.remove(movie_choice)
     n = n+1
 
+todays_date = date.today().strftime('%A, %B %d, %Y')
+html = ""
+html += f"<h3>Good Morning, {USER_NAME}!</h3>"
+html += "<h4>Today's Date</h4>"
+html += f"<p>{todays_date}</p>"
+html += f"<h4>Todays Movie Recomendations:</h4>"
+
 for single_movie in movies_list:
     movie = tmdb.Movies(single_movie)
     response = movie.info()  
@@ -125,5 +165,25 @@ for single_movie in movies_list:
     for genre in genres:
         print(genre['name'])
     print("\n")
+
+    
+    html += "<ul>"
+    html += f"<h3>Movie Name: {title} <h2>"
+    html += f"<h4>Additional Information<h4>"
+    html += f"<p>Overview: {plot}<p>"
+    html += f"<p>Length: {runtime} minutes<p>"
+    html += f"<p>Release Date: {year}<p>"
+    html += f"<p>Movie Rating: {score}/10 <p>"
+    html += f"<h4>Genre(s):<h4>"
+    for genre in genres:
+        html += f"<li> {genre['name']}</li>"
+    html += "</ul>"
+
+send_email(subject="[Daily Briefing] Movie Time", html=html)
+
         
+
+# app/email_service.py
+
+
 
