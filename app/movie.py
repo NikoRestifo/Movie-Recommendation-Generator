@@ -154,6 +154,7 @@ for single_movie in movies_list:
     year = movie.release_date
     score = movie.vote_average
     genres = movie.genres
+    #poster = movie.poster_path
 
     print("Movie Name: " + str(title) + '\n')
     print("Additional Information")
@@ -168,6 +169,7 @@ for single_movie in movies_list:
 
     
     html += "<ul>"
+    #html += f"<img src='/6SQQ5REuAz7k0FMQ9mSCT40T2LN.jpg' alt='Girl in a jacket' width='500' height='600'>"
     html += f"<h3>Movie Name: {title} <h2>"
     html += f"<h4>Additional Information<h4>"
     html += f"<p>Overview: {plot}<p>"
