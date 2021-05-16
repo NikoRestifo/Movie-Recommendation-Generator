@@ -6,26 +6,38 @@ from dotenv import load_dotenv
 import random
 from app import APP_ENV
 from genre_codes import genre_codes
-from app.email import send_email
+from app.email import SENDER_EMAIL_ADDRESS, send_email
 from datetime import date
 
 
 
 load_dotenv()
 
+GENRE = os.getenv("GENRE", default=None)
+VOTE_AVERAGE = os.getenv("VOTE_AVERAGE", default=None)
+MOVIE_MINIMUM_YEAR = os.getenv("MOVIE_MINIMUM_YEAR", default=None)
+RUNTIME_MINIMUM = os.getenv("RUNTIME_MINIMUM", default=None)
+RUNTIME_MAXIMUM = os.getenv("RUNTIME_MAXIMUM", default=None)
+MOVIE_CERT = os.getenv("MOVIE_CERT", default=None)
+MOVIE_CERT = os.getenv("MOVIE_CERT", default=None)
+NAME = os.getenv("NAME", default="Movie Lover")
+USER_EMAIL = os.getenv("USER_EMAIL", default=SENDER_EMAIL_ADDRESS)
+
 def set_movie_settings():
     if APP_ENV == "development":
         movie_genre = str(input("Select Movie Genre: "))
         vote_average = str(input("Minimum Movie Rating: "))
-        #movie_year_min = str(input("Movies Released in Year: "))
         movie_year_min = str(input("Movies Release After Year: "))
         runtime_min = str(input("Minimum Runtime: "))
         runtime_max = str(input("Maximum Runtime: "))
         movie_certification = str(input("Enter Movie Certification: "))
-        #movie_year_start = input("Movies Released After Year:")
-    #else:
-    #    user_country = COUNTRY_CODE
-    #    user_zip = ZIP_CODE
+    else:
+        movie_genre = GENRE
+        vote_average = VOTE_AVERAGE
+        movie_year_min = MOVIE_MINIMUM_YEAR
+        runtime_min = RUNTIME_MINIMUM
+        runtime_max = RUNTIME_MAXIMUM
+        movie_certification = MOVIE_CERT
     return movie_genre, vote_average, movie_year_min, runtime_min, runtime_max, movie_certification
 
 
@@ -33,6 +45,10 @@ def set_user_settings():
     if APP_ENV == "development":
         USER_NAME = input("Please enter your name: ")
         RECIEVE_ADDRESS = input("Please enter your email address: ")
+    else:
+        USER_NAME = NAME
+        RECIEVE_ADDRESS = USER_EMAIL
+        
     return USER_NAME, RECIEVE_ADDRESS
 
 tmdb.API_KEY='c4c3cb40b87c5d67f381e5bbdc3763ca'
