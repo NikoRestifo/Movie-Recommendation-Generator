@@ -13,11 +13,36 @@ from datetime import date
 
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 SENDER_EMAIL_ADDRESS = os.getenv("SENDER_EMAIL_ADDRESS")
-USER_NAME = os.getenv("USER_NAME", default="Player 1")
+#USER_NAME = os.getenv("USER_NAME", default="Player 1")
 
 load_dotenv()
 
-def send_email(subject="[Daily Briefing] This is a test", html="<p>Hello World</p>", recipient_address=SENDER_EMAIL_ADDRESS):
+def set_movie_settings():
+    if APP_ENV == "development":
+        movie_genre = str(input("Select Movie Genre: "))
+        vote_average = str(input("Minimum Movie Rating: "))
+        #movie_year_min = str(input("Movies Released in Year: "))
+        movie_year_min = str(input("Movies Release After Year: "))
+        runtime_min = str(input("Minimum Runtime: "))
+        runtime_max = str(input("Maximum Runtime: "))
+        movie_certification = str(input("Enter Movie Certification: "))
+        #movie_year_start = input("Movies Released After Year:")
+    #else:
+    #    user_country = COUNTRY_CODE
+    #    user_zip = ZIP_CODE
+    return movie_genre, vote_average, movie_year_min, runtime_min, runtime_max, movie_certification
+
+pick_movie_genre, pick_vote_average, pick_movie_year_min, pick_runtime_min, pick_runtime_max, pick_certification = set_movie_settings()
+
+def set_user_settings():
+    if APP_ENV == "development":
+        USER_NAME = input("Please enter your name: ")
+        RECIEVE_ADDRESS = input("Please enter your email address: ")
+    return USER_NAME, RECIEVE_ADDRESS
+
+USER_NAME, RECIEVE_ADDRESS = set_user_settings()
+
+def send_email(subject="[Daily Briefing] This is a test", html="<p>Hello World</p>", recipient_address=RECIEVE_ADDRESS):
     """
     Sends an email with the specified subject and html contents to the specified recipient,
 
@@ -42,23 +67,6 @@ tmdb.API_KEY='c4c3cb40b87c5d67f381e5bbdc3763ca'
 
 #Genre = os.getenv("COUNTRY_CODE", default="US")
 #ZIP_CODE = os.getenv("ZIP_CODE", default="20057")
-
-def set_movie_settings():
-    if APP_ENV == "development":
-        movie_genre = str(input("Select Movie Genre: "))
-        vote_average = str(input("Minimum Movie Rating: "))
-        #movie_year_min = str(input("Movies Released in Year: "))
-        movie_year_min = str(input("Movies Release After Year: "))
-        runtime_min = str(input("Minimum Runtime: "))
-        runtime_max = str(input("Maximum Runtime: "))
-        movie_certification = str(input("Enter Movie Certification: "))
-        #movie_year_start = input("Movies Released After Year:")
-    #else:
-    #    user_country = COUNTRY_CODE
-    #    user_zip = ZIP_CODE
-    return movie_genre, vote_average, movie_year_min, runtime_min, runtime_max, movie_certification
-
-pick_movie_genre, pick_vote_average, pick_movie_year_min, pick_runtime_min, pick_runtime_max, pick_certification = set_movie_settings()
 
 def format_movie_year_min(pick_movie_year_min):
     if bool(pick_movie_year_min) == True:
@@ -119,6 +127,7 @@ def genre_string_to_id():
     return genre_id
 
 genre_number=genre_string_to_id()
+
 
 page_numbers = []
 
@@ -189,7 +198,7 @@ for single_movie in movies_list:
         html += f"<li> {genre['name']}</li>"
     html += "</ul>"
 
-send_email(subject="[Daily Briefing] Movie Time", html=html)
+send_email(subject="[Daily Briefing] Movie Time", html=html, recipient_address=RECIEVE_ADDRESS)
 
         
 
