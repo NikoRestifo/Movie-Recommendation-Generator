@@ -1,1 +1,6 @@
-# final_draft
+# Movie Suggestion App
+
+Sends you a customized email with movie suggestions based on your preferences!
+
+![](screenshot.png)
+
