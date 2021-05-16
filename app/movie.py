@@ -7,9 +7,6 @@ import random
 from app import APP_ENV
 from genre_codes import genre_codes
 
-
-import os
-from dotenv import load_dotenv
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from datetime import date
@@ -64,39 +61,51 @@ def set_movie_settings():
 
 pick_movie_genre, pick_vote_average, pick_movie_year_min, pick_runtime_min, pick_runtime_max, pick_certification = set_movie_settings()
 
-if bool(pick_movie_year_min) == True:
-    movie_year_min = str(pick_movie_year_min)
-else:
-    movie_year_min = None
+def format_movie_year_min(pick_movie_year_min):
+    if bool(pick_movie_year_min) == True:
+        movie_year_min = str(pick_movie_year_min) + "-01-01"
+    else:
+        movie_year_min = None
+    return movie_year_min
 
-print(type(movie_year_min))
-print(movie_year_min)
+movie_year_min = format_movie_year_min(pick_movie_year_min)
 
-if bool(pick_vote_average) == True:
-    vote_average = float(pick_vote_average)
-else:
-    vote_average = None
+def format_vote_average(pick_vote_average):
+    if bool(pick_vote_average) == True:
+        vote_average = float(pick_vote_average)
+    else:
+        vote_average = None
+    return vote_average
 
-if bool(pick_runtime_min) == True:
-    runtime_min = int(pick_runtime_min)
-else:
-    runtime_min = None
+vote_average = format_vote_average(pick_vote_average)
 
-if bool(pick_runtime_max) == True:
-    runtime_max = int(pick_runtime_max)
-else:
-    runtime_max = None
+def format_runtime_min(pick_runtime_min):
+    if bool(pick_runtime_min) == True:
+        runtime_min = int(pick_runtime_min)
+    else:
+        runtime_min = None
+    return runtime_min
 
-if bool(pick_runtime_max) == True:
-    runtime_max = int(pick_runtime_max)
-else:
-    runtime_max = None
+runtime_min = format_runtime_min(pick_runtime_min)
 
-if bool(pick_certification) == True:
-    movie_certification= str(pick_certification)
-else:
-    movie_certification = None
 
+def format_runtime_max(pick_runtime_max):
+    if bool(pick_runtime_max) == True:
+        runtime_max = int(pick_runtime_max)
+    else:
+        runtime_max = None
+    return runtime_max
+
+runtime_max = format_runtime_max(pick_runtime_max)
+
+def format_movie_certification(pick_certification):
+    if bool(pick_certification) == True:
+        movie_certification= str(pick_certification)
+    else:
+        movie_certification = None
+    return movie_certification
+
+movie_certification = format_movie_certification(pick_certification)
 
 def genre_string_to_id():
     ids_list = []
@@ -123,7 +132,7 @@ discover = tmdb.Discover()
 movie_ids = []
 for page_number in page_numbers:
     response = discover.movie(sort_by="popularity.desc", with_genres=genre_number, vote_average_gte=vote_average, 
-    primary_release_year=None, primary_release_date_gte=(movie_year_min + "-01-01"), with_runtime_gte=runtime_min, with_runtime_lte=runtime_max, 
+    primary_release_year=None, primary_release_date_gte=movie_year_min, with_runtime_gte=runtime_min, with_runtime_lte=runtime_max, 
     certification_country="US", certification=movie_certification, page=page_number)
     for value in response['results']:
         id = value['id']
@@ -154,7 +163,7 @@ for single_movie in movies_list:
     year = movie.release_date
     score = movie.vote_average
     genres = movie.genres
-    #poster = movie.poster_path
+    poster = movie.poster_path
 
     print("Movie Name: " + str(title) + '\n')
     print("Additional Information")
@@ -169,7 +178,7 @@ for single_movie in movies_list:
 
     
     html += "<ul>"
-    #html += f"<img src='/6SQQ5REuAz7k0FMQ9mSCT40T2LN.jpg' alt='Girl in a jacket' width='500' height='600'>"
+    html += f"<img src='https://image.tmdb.org/t/p/original/{poster}' alt='Movie Poster' width='500' height='600'>"
     html += f"<h3>Movie Name: {title} <h2>"
     html += f"<h4>Additional Information<h4>"
     html += f"<p>Overview: {plot}<p>"
