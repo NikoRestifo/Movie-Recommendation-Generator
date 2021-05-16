@@ -1,16 +1,14 @@
-# app/email_service.py
-
 import os
 from dotenv import load_dotenv
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
-from datetime import date
+from app import APP_ENV
 
 load_dotenv()
 
+
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 SENDER_EMAIL_ADDRESS = os.getenv("SENDER_EMAIL_ADDRESS")
-
 
 def send_email(subject="[Daily Briefing] This is a test", html="<p>Hello World</p>", recipient_address=SENDER_EMAIL_ADDRESS):
     """
@@ -32,23 +30,3 @@ def send_email(subject="[Daily Briefing] This is a test", html="<p>Hello World</
     except Exception as e:
         print("OOPS", type(e), e.message)
         return None
-
-todays_date = date.today().strftime('%A, %B %d, %Y')
-html = ""
-html += f"<h3>Good Morning, {USER_NAME}!</h3>"
-html += "<h4>Today's Date</h4>"
-html += f"<p>{todays_date}</p>"
-html += f"<h4>Todays Movie Recomendations:</h4>"
-html += "<ul>"
-html += f"<li>Movie Name: {title} </li>"
-html += f"<li>Additional Information</li>"
-html += f"<li>Overview:  {plot}</li>"
-html += f"<li>Length: {runtime} minutes</li>"
-html += f"<li>Release Date: {year}</li>"
-html += f"<li>Movie Rating: {score} + /10 </li>"
-html += f"<li>Genre(s):</li>"
-for genre in genres:
-    html += f"<li> {genre['name']}</li>"
-html += "</ul>"
-
-send_email(subject="[Daily Briefing] My Morning Report", html=html)
