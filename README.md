@@ -37,3 +37,6 @@ Create a new file called ".env" in the root directory of this repo, and paste th
 # required vars:
 SENDGRID_API_KEY="_______________"
 SENDER_EMAIL_ADDRESS="_______________"
+
+
+APP_ENV="production" USER_EMAIL=SENDER_EMAIL_ADDRESS python -m app.main
