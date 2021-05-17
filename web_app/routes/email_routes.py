@@ -2,10 +2,10 @@
 
 from flask import Blueprint, jsonify
 
-book_routes = Blueprint("email_routes", __name__)
+email_routes = Blueprint("email_routes", __name__)
 
-@book_routes.route("/api/email")
-@book_routes.route("/api/email.json")
+@email_routes.route("/email")
+@email_routes.route("/email.json")
 def list_books():
     print("EMAIL")
     books = [
@@ -15,8 +15,8 @@ def list_books():
     ] # some dummy / placeholder data
     return jsonify(email)
 
-@book_routes.route("/api/email/<int:book_id>")
-@book_routes.route("/api/email/<int:book_id>.json")
+@email_routes.route("/email/<int:book_id>")
+@email_routes.route("/email/<int:book_id>.json")
 def get_book(book_id):
     print("BOOK...", book_id)
     book = {"id": book_id, "title": f"Example Book", "year": 2000} # some dummy / placeholder data

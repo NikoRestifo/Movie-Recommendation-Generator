@@ -2,21 +2,21 @@
 
 from flask import Blueprint, request, render_template
 
-home_routes = Blueprint("main_routes", __name__)
+main_routes = Blueprint("main_routes", __name__)
 
-@home_routes.route("/")
-@home_routes.route("/main")
+@main_routes.route("/")
+@main_routes.route("/welcome")
 def index():
     print("HOME...")
     #return "Welcome Home"
     return render_template("welcome.html")
 
-@home_routes.route("/about")
+@main_routes.route("/about")
 def about():
     print("ABOUT...")
     return render_template("about.html")
 
-@home_routes.route("/select")
+@main_routes.route("/select")
 def hello_world():
     print("HELLO...", dict(request.args))
     # NOTE: `request.args` is dict-like, so below we're using the dictionary's `get()` method,
