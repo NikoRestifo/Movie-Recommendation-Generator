@@ -1,0 +1,21 @@
+{% extends "bootstrap.html" %}
+{% set active_page = 'select' %}
+
+{% block content %}
+
+    <h2>Results for {{ results["name"] }}</h2>
+
+    <p>Genre: {{ genre }}</p>
+    <p>Rating: {{ rating }}</p>
+    <p>Min Year: {{ movie_min_year }}</p>
+    <p>Vote: {{ vote_average }}</p>
+    <p>Min Runtime: {{ runtime_min }}</p>
+    <p>Max Runtime: {{ runtime_max }}</p>
+    <p>Email: {{ email }}</p>
+
+
+    <!-- TODO: consider using a table instead of a list -->
+    <!-- TODO: consider adding images using the provided icon urls -->
+    <ul>
+
+{% endblock %}

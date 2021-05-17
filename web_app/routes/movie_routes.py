@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, render_template, redirect, flash
 
-from app.movie import set_movie_settings
+#from app.movie import set_movie_settings
 
 movie_routes = Blueprint("movie_routes", __name__)
 #
@@ -18,10 +18,10 @@ movie_routes = Blueprint("movie_routes", __name__)
 #    else:
 #        return jsonify({"message":"Invalid Geography. Please try again."}), 404
 #
-@movie_routes.route("/weather/form")
-def weather_form():
+@movie_routes.route("/select/form")
+def select_form():
     print("WEATHER FORM...")
-    return render_template("weather_form.html")
+    return render_template("form.html")
 #
 #@movie_routes.route("/weather/forecast", methods=["GET", "POST"])
 #def weather_forecast():

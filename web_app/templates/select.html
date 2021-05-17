@@ -1,5 +1,5 @@
 {% extends "bootstrap.html" %}
-{% set active_page = 'Select' %}
+{% set active_page = 'select_form' %}
 
 {% block content %}
 
@@ -40,7 +40,7 @@
       <option value="G">G</option>
     </select>
 
-    <form action="/weather/forecast" method="POST">
+    <form action="/select/form" method="POST">
 
         <label>Minimum Movie Year:</label>
         <input type="text" name="movie_min_year" placeholder="1980" value="1980">
