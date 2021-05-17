@@ -1,5 +1,6 @@
 
 import os
+from dotenv import load_dotenv
 from flask import Flask
 
 from web_app.routes.email_routes import email_routes

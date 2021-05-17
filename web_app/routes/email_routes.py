@@ -14,10 +14,10 @@ def list_books():
         {"id": 3, "title": "Book 3", "year": 2031},
     ] # some dummy / placeholder data
     return jsonify(email)
-
-@email_routes.route("/email/<int:book_id>")
-@email_routes.route("/email/<int:book_id>.json")
-def get_book(book_id):
-    print("BOOK...", book_id)
-    book = {"id": book_id, "title": f"Example Book", "year": 2000} # some dummy / placeholder data
-    return jsonify(book)
+#
+#@email_routes.route("/email/<int:book_id>")
+#@email_routes.route("/email/<int:book_id>.json")
+#def get_book(book_id):
+#    print("BOOK...", book_id)
+#    book = {"id": book_id, "title": f"Example Book", "year": 2000} # some dummy / placeholder data
+#    return jsonify(book)
