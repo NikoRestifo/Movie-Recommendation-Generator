@@ -1,3 +1,4 @@
+#from app.main import RECEIVE_ADDRESS
 from flask import Blueprint, request, jsonify, render_template, redirect, flash
 
 movie_routes = Blueprint("movie_routes", __name__)
@@ -23,9 +24,11 @@ def weather_forecast_api():
     runtime_min = request.args.get("runime_min") or None
     runtime_max = request.args.get("runtime_max") or None
     movie_certification = request.args.get("rating") or None
-    user_name = request.args.get("name") or None
-    receive_address = request.args.get("email_address") or None
-    USER_NAME, RECIEVE_ADDRESS = set_user_settings(user_name, receive_address)
+#    USER_NAME = request.args.get("name") or None
+#    RECIEVE_ADDRESS = request.args.get("email_address") or None
+#    USER_NAME = request.args.get("name") or None
+#    RECEIVE_ADDRESS = request.args.get("email_address") or None
+    USER_NAME, RECIEVE_ADDRESS = set_user_settings(user_name, recieve_address)
 
     movie_year_min = format_movie_year_min(movie_year_min)
     vote_average = format_vote_average(vote_average)
@@ -44,9 +47,9 @@ def weather_forecast_api():
 @movie_routes.route("/select")
 def select_form():
     print("WEATHER FORM...")
-    return render_template("select_form.html")
+    return render_template("select.html")
 #
-@movie_routes.route("/select", methods=["GET", "POST"])
+@movie_routes.route("/select/form", methods=["GET", "POST"])
 def movie_forecast():
     print("WEATHER FORECAST...")
 
@@ -59,19 +62,19 @@ def movie_forecast():
 
     #country_code = request_data.get("country_code") or "US"
     #zip_code = request_data.get("zip_code") or "20057"
-    movie_genre = request.data.get("movie_genre") or None
-    vote_average = request.data.get("vote_average") or None
-    movie_year_min = request.data.get("movie_min_year") or None
-    runtime_min = request.data.get("runime_min") or None
-    runtime_max = request.data.get("runtime_max") or None
-    movie_certification = request.data.get("rating") or None
-    user_name = request.data.get("name") or None
-    receive_address = request.data.get("email_address") or None
+    movie_genre = request_data.get("movie_genre")
+    vote_average = request_data.get("vote_average")
+    movie_year_min = request_data.get("movie_min_year")
+    runtime_min = request_data.get("runime_min") 
+    runtime_max = request_data.get("runtime_max")
+    movie_certification = request_data.get("rating")
+    USER_NAME = request_data.get("name")
+    RECIEVE_ADDRESS = request_data.get("email_address")
 
-    results = run_API(movie_year_min= movie_year_min, vote_average = vote_average, runtime_min = runtime_min, runtime_max = runtime_max, movie_certification= movie_certification, genre_number= movie_genre, USER_NAME= user_name, RECIEVE_ADDRESS=receive_address)
+    results = run_API(movie_year_min= movie_year_min, vote_average = vote_average, runtime_min = runtime_min, runtime_max = runtime_max, movie_certification= movie_certification, genre_number= movie_genre, USER_NAME= USER_NAME, RECIEVE_ADDRESS= RECIEVE_ADDRESS)
     if results == None:
         flash("Geography Error. Please try again!", "danger")
-        return redirect("/select")
+        return redirect("/select/form")
     else:
         flash("Successfully!", "success")
-        return render_template("select_form.html", movie_year_min= movie_year_min, vote_average = vote_average, runtime_min = runtime_min, runtime_max = runtime_max, movie_certification= movie_certification, movie_genre = movie_genre, USER_NAME= user_name, RECIEVE_ADDRESS=receive_address, results=results)
+        return render_template("select_form.html", movie_year_min= movie_year_min, vote_average = vote_average, runtime_min = runtime_min, runtime_max = runtime_max, movie_certification= movie_certification, movie_genre = movie_genre, USER_NAME= USER_NAME, RECIEVE_ADDRESS=RECIEVE_ADDRESS, results=results)
