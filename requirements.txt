@@ -5,3 +5,4 @@ Flask
 gunicorn
 pandas
 requests
+pytest
