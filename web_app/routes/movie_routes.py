@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, render_template, redirect, flash
 
-from app.movie import set_movie_settings
+#from app.movie import set_movie_settings
 
 movie_routes = Blueprint("movie_routes", __name__)
 #
