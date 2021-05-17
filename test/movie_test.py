@@ -9,6 +9,7 @@ from app.movie import genre_string_to_id
 from app.movie import run_API
 from app.movie import format_vote_average
 
+CI_ENV = os.getenv("CI") == "false"
 
 def test_movie_year_min():
     assert format_movie_year_min("1990") == "1990-01-01"
