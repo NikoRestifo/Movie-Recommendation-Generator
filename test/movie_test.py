@@ -9,7 +9,7 @@ from app.movie import genre_string_to_id
 from app.movie import run_API
 from app.movie import format_vote_average
 
-#CI_ENV = os.getenv("CI") == "false"
+CI_ENV = os.getenv("CI") == "false"
 
 def test_movie_year_min():
     assert format_movie_year_min("1990") == "1990-01-01"
@@ -42,9 +42,9 @@ def test_genre_string_to_id():
     assert genre_string_to_id("animation") == "16"
     assert genre_string_to_id("") == None
 
-#CI_ENV = os.getenv("CI") == "true"
+CI_ENV = os.getenv("CI") == "true"
 
-#@pytest.mark.skipif(CI_ENV==True, reason="to avoid issuing HTTP requests on the CI server") # skips this test on CI
+@pytest.mark.skipif(CI_ENV==True, reason="to avoid issuing HTTP requests on the CI server") # skips this test on CI
 
-#def test_run_API():
-    #assert run_API("two-thousand", None, None, None, None, None, None, None) == None
+def test_run_API():
+    assert run_API("two-thousand", None, None, None, None, None, None, None) == None
