@@ -60,36 +60,24 @@ def format_movie_year_min(pick_movie_year_min):
 
 
 def format_vote_average(pick_vote_average):
-    try:
-        if bool(pick_vote_average) == True:
-            vote_average = float(pick_vote_average)
-        else:
-            vote_average = None
-    except(ValueError):
-        print("You entered an invalid value for the Minimum Movie Rating. Please try again.")
-        quit()
+    if bool(pick_vote_average) == True:
+        vote_average = float(pick_vote_average)
+    else:
+        vote_average = None
     return vote_average
 
 def format_runtime_min(pick_runtime_min):
-    try:
-        if bool(pick_runtime_min) == True:
-            runtime_min = int(pick_runtime_min)
-        else:
-            runtime_min = None
-    except(ValueError):
-        print("You entered an invalid value for the Minimum Runtime. Please try again")
-        quit()  
+    if bool(pick_runtime_min) == True:
+        runtime_min = int(pick_runtime_min)
+    else:
+        runtime_min = None
     return runtime_min
 
 def format_runtime_max(pick_runtime_max):
-    try:
-        if bool(pick_runtime_max) == True:
-            runtime_max = int(pick_runtime_max)
-        else:
+    if bool(pick_runtime_max) == True:
+        runtime_max = int(pick_runtime_max)
+    else:
             runtime_max = None
-    except(ValueError):
-        print("You entered an invalid value for the Maximum Runtime. Please try again")
-        quit()
     return runtime_max
 
 def format_movie_certification(pick_certification):
