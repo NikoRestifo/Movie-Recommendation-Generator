@@ -7,65 +7,64 @@
 
     <p>Please input the key characteristics you would like your movie to have.</p>
 
-    <label for="genres">Choose a genre:</label>
+    <form action="/select" method="POST"></form>
 
-    <select name="genre" id="genre">
-      <option value="28">Action</option>
-      <option value="12">Adventure</option>
-      <option value="16">Animation</option>
-      <option value="35">Comedy</option>
-      <option value="80">Crime</option>
-      <option value="99">Documentary</option>
-      <option value="18">Drama</option>
-      <option value="10751">Family</option>
-      <option value="14">Fantasy</option>
-      <option value="36">History</option>
-      <option value="27">Horror</option>
-      <option value="10402">Music</option>
-      <option value="9648">Mystery</option>
-      <option value="10749">Romance</option>
-      <option value="878">Science Fiction</option>
-      <option value="10770">TV Movie</option>
-      <option value="53">Thriller</option>
-      <option value="10752">War</option>
-      <option value="37">Western</option> 
-    </select>
-   
-    <label for="rating">Choose a rating:</label>
+      <label for="genres">Choose a genre:</label>
 
-    <select name="rating" id="rating">
-      <option value="R">R</option>
-      <option value="PG13">PG-13</option>
-      <option value="PG">PG</option>
-      <option value="G">G</option>
-    </select>
+      <select name="genre" id="genre">
+        <option value="28">Action</option>
+        <option value="12">Adventure</option>
+        <option value="16">Animation</option>
+        <option value="35">Comedy</option>
+        <option value="80">Crime</option>
+        <option value="99">Documentary</option>
+        <option value="18">Drama</option>
+        <option value="10751">Family</option>
+        <option value="14">Fantasy</option>
+        <option value="36">History</option>
+        <option value="27">Horror</option>
+        <option value="10402">Music</option>
+        <option value="9648">Mystery</option>
+        <option value="10749">Romance</option>
+        <option value="878">Science Fiction</option>
+        <option value="10770">TV Movie</option>
+        <option value="53">Thriller</option>
+        <option value="10752">War</option>
+        <option value="37">Western</option> 
+      </select>
+    
+      <label for="rating">Choose a rating:</label>
 
-    <form action="/select/form" method="POST">
+      <select name="rating" id="rating">
+        <option value="R">R</option>
+        <option value="PG13">PG-13</option>
+        <option value="PG">PG</option>
+        <option value="G">G</option>
+      </select>
 
-        <label>Minimum Movie Year:</label>
-        <input type="text" name="movie_min_year" placeholder="1980" value="1980">
-        <br>
+      <label>Minimum Movie Year:</label>
+      <input type="text" name="movie_min_year" placeholder="1980" value="1980">
+      <br> 
 
-        <label>Minimum Audience Rating</label>
-        <input type="text" name="vote_average" placeholder="7" value="7">
-        <br>
+      <label>Minimum Audience Rating</label>
+      <input type="text" name="vote_average" placeholder="7" value="7">
+      <br> 
 
-        <label>Minimum Runtime (minutes) </label>
-        <input type="text" name="runtime_min" placeholder="150" value="150">
+      <label>Minimum Runtime (minutes) </label>
+      <input type="text" name="runtime_min" placeholder="150" value="150">
+      <label>Maximum Runtime </label>
+      <input type="text" name="runtime_max" placeholder="200" value="200">
+      <br>
 
-        <label>Maximum Runtime </label>
-        <input type="text" name="runtime_max" placeholder="200" value="200">
-        <br>
+      <label>Your Name</label>
+      <input type="text" name="name" placeholder="Steve Buscemi" value="Steve Buscemi">
+      <br>
 
-        <label>Your Name</label>
-        <input type="text" name="name" placeholder="Steve Buscemi" value="Steve Buscemi">
-        <br>
+      <label>Your Email Address</label>
+      <input type="text" name="email_address" placeholder="lilcaesars@aol.com" value="lilcaesars@aol.com">
+      <br>
 
-        <label>Your Email Address</label>
-        <input type="text" name="email_address" placeholder="lilcaesars@aol.com" value="lilcaesars@aol.com">
-        <br>
-
-        <button>Submit</button>
+      <button>Submit</button>
     </form>
 
 {% endblock %}
