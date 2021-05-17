@@ -3,6 +3,5 @@ python-dotenv
 sendgrid==6.6.0
 Flask
 gunicorn
-pandas
 requests
 pytest

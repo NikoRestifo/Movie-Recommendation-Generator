@@ -13,7 +13,7 @@ CI_ENV = os.getenv("CI") == "false"
 
 def test_movie_year_min():
     assert format_movie_year_min("1990") == "1990-01-01"
-    #assert format_movie_year_min("") == None
+    assert format_movie_year_min("") == None
 
 def test_vote_average():
     assert format_vote_average("7.2") == 7.2
@@ -39,7 +39,6 @@ def test_movie_certification():
 
 def test_genre_string_to_id():
     assert genre_string_to_id("Animation") == "16"
-    assert genre_string_to_id("animation") == "16"
     assert genre_string_to_id("") == None
 
 CI_ENV = os.getenv("CI") == "true"

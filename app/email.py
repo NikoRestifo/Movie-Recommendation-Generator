@@ -6,6 +6,7 @@ from app import APP_ENV
 
 load_dotenv()
 
+#This file is where the send email capabilites are coded
 
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 SENDER_EMAIL_ADDRESS = os.getenv("SENDER_EMAIL_ADDRESS")

@@ -8,6 +8,7 @@ from app.movie import format_movie_certification
 from app.movie import genre_string_to_id
 from app.movie import run_API
 
+#all code runs from this file
 
 pick_movie_genre, pick_vote_average, pick_movie_year_min, pick_runtime_min, pick_runtime_max, pick_certification = set_movie_settings()
 
@@ -29,4 +30,4 @@ try:
     run_API(movie_year_min, vote_average, runtime_min, runtime_max, movie_certification, genre_number, USER_NAME, RECIEVE_ADDRESS)
 
 except:
-    print("OOPS ran into error")
+    print("Data Invalid. Please try re-entering preferences or your email address.")

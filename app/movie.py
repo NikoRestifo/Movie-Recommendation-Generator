@@ -23,6 +23,10 @@ USER_EMAIL = os.getenv("USER_EMAIL", default=SENDER_EMAIL_ADDRESS)
 TMDB_API_KEY = os.getenv("TMDB_API_KEY")
 
 def set_movie_settings():
+    """
+    Takes in all of the user inputs for their movie preferences and returns each so they could be used later
+    to generate reccomendations
+    """
     if APP_ENV == "development":
         movie_genre = str(input("Select Movie Genre: "))
         vote_average = str(input("Minimum Movie Rating: "))
@@ -40,6 +44,9 @@ def set_movie_settings():
     return movie_genre, vote_average, movie_year_min, runtime_min, runtime_max, movie_certification
 
 def set_user_settings():
+    """
+    Gets the user's name and email address so the recommendations could be sent
+    """
     if APP_ENV == "development":
         USER_NAME = input("Please enter your name: ")
         RECIEVE_ADDRESS = input("Please enter your email address: ")
@@ -52,6 +59,9 @@ def set_user_settings():
 tmdb.API_KEY=TMDB_API_KEY
 
 def format_movie_year_min(pick_movie_year_min):
+    """
+    Ensures that the minimum movie year is properly formatted (parameter is the minimum movie year)
+    """
     if bool(pick_movie_year_min) == True:
             movie_year_min = str(pick_movie_year_min) + "-01-01"
     else:
@@ -60,6 +70,9 @@ def format_movie_year_min(pick_movie_year_min):
 
 
 def format_vote_average(pick_vote_average):
+    """
+    Ensures the movie rating is properly formatted (parameter is the inputted vote average)
+    """
     if bool(pick_vote_average) == True:
         vote_average = float(pick_vote_average)
     else:
@@ -67,6 +80,9 @@ def format_vote_average(pick_vote_average):
     return vote_average
 
 def format_runtime_min(pick_runtime_min):
+    """
+    Ensures the minimum runtime is properly formatted (parameter is the inputted minimum runtime)
+    """
     if bool(pick_runtime_min) == True:
         runtime_min = int(pick_runtime_min)
     else:
@@ -74,6 +90,9 @@ def format_runtime_min(pick_runtime_min):
     return runtime_min
 
 def format_runtime_max(pick_runtime_max):
+    """
+    Ensures the maximum runtime is properly formatted (parameter is the inputted maximum runtime)
+    """
     if bool(pick_runtime_max) == True:
         runtime_max = int(pick_runtime_max)
     else:
@@ -81,6 +100,9 @@ def format_runtime_max(pick_runtime_max):
     return runtime_max
 
 def format_movie_certification(pick_certification):
+    """
+    Ensures the Movie Certification is properly formatted (parameter is the inputted Movie Certification)
+    """
     if bool(pick_certification) == True:
         movie_certification= str(pick_certification)
     else:
@@ -91,7 +113,7 @@ def genre_string_to_id(pick_movie_genre):
     ids_list = []
     genre_select = genre_codes['genres']
     for genre in genre_select:
-        if genre['name'].lower() == pick_movie_genre.lower():
+        if genre['name'] == pick_movie_genre:
             genre_id = str(genre['id'])
             ids_list.append(genre_id)
             break
@@ -101,6 +123,9 @@ def genre_string_to_id(pick_movie_genre):
 
 
 def run_API(movie_year_min, vote_average, runtime_min, runtime_max, movie_certification, genre_number, USER_NAME, RECIEVE_ADDRESS):
+    """
+    Calls the API (TMBD API) and outputs movie info and sends user email based on all parameters
+    """
     page_numbers = []
     p = 1
     while p<100:
@@ -132,7 +157,7 @@ def run_API(movie_year_min, vote_average, runtime_min, runtime_max, movie_certif
 
     todays_date = date.today().strftime('%A, %B %d, %Y')
     html = ""
-    html += f"<h3>Good Morning, {USER_NAME}!</h3>"
+    html += f"<h3>Hello, {USER_NAME}!</h3>"
     html += "<h4>Today's Date</h4>"
     html += f"<p>{todays_date}</p>"
     html += f"<h4>Todays Movie Recomendations:</h4>"
@@ -159,7 +184,6 @@ def run_API(movie_year_min, vote_average, runtime_min, runtime_max, movie_certif
             print(genre['name'])
         print("\n")
         
-        html += "<ul>"
         html += f"<img src='https://image.tmdb.org/t/p/original/{poster}' alt='Movie Poster' width='500' height='600'>"
         html += f"<h3>Movie Name: {title} <h2>"
         html += f"<h4>Additional Information<h4>"
@@ -170,9 +194,8 @@ def run_API(movie_year_min, vote_average, runtime_min, runtime_max, movie_certif
         html += f"<h4>Genre(s):<h4>"
         for genre in genres:
             html += f"<li> {genre['name']}</li>"
-        html += "</ul>"
 
-    send_email(subject="[Daily Briefing] Movie Time", html=html, recipient_address=RECIEVE_ADDRESS)
+    send_email(subject="Movies for You", html=html, recipient_address=RECIEVE_ADDRESS)
 
 
 
