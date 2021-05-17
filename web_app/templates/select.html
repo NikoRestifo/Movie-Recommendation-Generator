@@ -7,30 +7,31 @@
 
     <p>Please input the key characteristics you would like your movie to have.</p>
 
-    <form action="/select" method="POST"></form>
+    <form action="/select" method="POST">
 
-      <label for="genres">Choose a genre:</label>
+      <label for="genre">Choose a genre:</label>
 
       <select name="genre" id="genre">
-        <option value="28">Action</option>
-        <option value="12">Adventure</option>
-        <option value="16">Animation</option>
-        <option value="35">Comedy</option>
-        <option value="80">Crime</option>
-        <option value="99">Documentary</option>
-        <option value="18">Drama</option>
-        <option value="10751">Family</option>
-        <option value="14">Fantasy</option>
-        <option value="36">History</option>
-        <option value="27">Horror</option>
-        <option value="10402">Music</option>
-        <option value="9648">Mystery</option>
-        <option value="10749">Romance</option>
-        <option value="878">Science Fiction</option>
-        <option value="10770">TV Movie</option>
-        <option value="53">Thriller</option>
-        <option value="10752">War</option>
-        <option value="37">Western</option> 
+        <option value="Action">Action</option>
+        <option value="Adventure">Adventure</option>
+        <option value="Animation">Animation</option>
+        <option value="Comedy">Comedy</option>
+        <option value="Crime">Crime</option>
+        <option value="Documentary">Documentary</option>
+        <option value="Drama">Drama</option>
+        <option value="Family">Family</option>
+        <option value="Fantasy">Fantasy</option>
+        <option value="History">History</option>
+        <option value="Horro">Horror</option>
+        <option value="Music">Music</option>
+        <option value="Mystery">Mystery</option>
+        <option value="Romance">Romance</option>
+        <option value="Science Fiction">Science Fiction</option>
+        <option value="TV Movie">TV Movie</option>
+        <option value="Thriller">Thriller</option>
+        <option value="War">War</option>
+        <option value="Western">Western</option> 
+        <option value="">No Preference</option> 
       </select>
     
       <label for="rating">Choose a rating:</label>
@@ -40,6 +41,7 @@
         <option value="PG13">PG-13</option>
         <option value="PG">PG</option>
         <option value="G">G</option>
+        <option value="">No Preference</option>
       </select>
 
       <label>Minimum Movie Year:</label>
@@ -50,7 +52,7 @@
       <input type="text" name="vote_average" placeholder="7" value="7">
       <br> 
 
-      <label>Minimum Runtime (minutes) </label>
+      <label>Minimum Runtime (in minutes) </label>
       <input type="text" name="runtime_min" placeholder="150" value="150">
       <label>Maximum Runtime </label>
       <input type="text" name="runtime_max" placeholder="200" value="200">

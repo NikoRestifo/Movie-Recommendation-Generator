@@ -25,8 +25,3 @@ def hello_world():
     name = request.args.get("name") or "World"
     message = f"Hello, {name}!"
     return render_template("select.html", message=message)
-
-@main_routes.route("/select/form")
-def form():
-    print("FORM...")
-    return render_template("form.html")

@@ -11,11 +11,15 @@
     <p>Vote: {{ vote_average }}</p>
     <p>Min Runtime: {{ runtime_min }}</p>
     <p>Max Runtime: {{ runtime_max }}</p>
-    <p>Email: {{ email }}</p>
+    <p>Email: {{ email_address }}</p>
 
 
     <!-- TODO: consider using a table instead of a list -->
     <!-- TODO: consider adding images using the provided icon urls -->
     <ul>
+        {% for forecast in results["movies_list"] %}
+            <li>{{ forecast["movie_ids"] }} | {{ forecast["movie.info"] }} </li>
+        {% endfor %}
+    </ul>
 
 {% endblock %}
