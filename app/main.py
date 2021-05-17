@@ -13,17 +13,20 @@ pick_movie_genre, pick_vote_average, pick_movie_year_min, pick_runtime_min, pick
 
 USER_NAME, RECIEVE_ADDRESS = set_user_settings()
 
-movie_year_min = format_movie_year_min(pick_movie_year_min)
+try:
+    movie_year_min = format_movie_year_min(pick_movie_year_min)
 
-vote_average = format_vote_average(pick_vote_average)
+    vote_average = format_vote_average(pick_vote_average)
 
-runtime_min = format_runtime_min(pick_runtime_min)
+    runtime_min = format_runtime_min(pick_runtime_min)
 
-runtime_max = format_runtime_max(pick_runtime_max)
+    runtime_max = format_runtime_max(pick_runtime_max)
 
-movie_certification = format_movie_certification(pick_certification)
+    movie_certification = format_movie_certification(pick_certification)
 
-genre_number=genre_string_to_id(pick_movie_genre)
+    genre_number=genre_string_to_id(pick_movie_genre)    
 
-run_API(movie_year_min, vote_average, runtime_min, runtime_max, movie_certification, genre_number, USER_NAME, RECIEVE_ADDRESS)
+    run_API(movie_year_min, vote_average, runtime_min, runtime_max, movie_certification, genre_number, USER_NAME, RECIEVE_ADDRESS)
 
+except:
+    print("OOPS ran into error")
