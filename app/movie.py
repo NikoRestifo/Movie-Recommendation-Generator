@@ -104,7 +104,7 @@ def format_runtime_max(pick_runtime_max):
 
 def format_movie_certification(pick_certification):
     if bool(pick_certification) == True:
-        movie_certification= str(pick_certification).lower()
+        movie_certification= str(pick_certification)
     else:
         movie_certification = None
     return movie_certification
