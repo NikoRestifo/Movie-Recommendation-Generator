@@ -4,6 +4,7 @@ from app.movie import format_runtime_min
 from app.movie import format_runtime_max
 from app.movie import format_movie_certification
 from app.movie import genre_string_to_id
+from app.movie import run_API
 
 def test_movie_year_min():
     assert format_movie_year_min("1990") == "1990-01-01"
@@ -18,7 +19,7 @@ def test_vote_average():
 def test_runtime_min():
     assert format_runtime_min("100") == 100
     assert format_runtime_min("") == None
-    #assert format_runtime_min("tree") == "You entered an invalid value for the Minimum Runtime. Please try again"
+    #assert format_runtime_min("tree") == ValueError
 
 def test_runtime_max():
     assert format_runtime_max("100") == 100
@@ -32,3 +33,6 @@ def test_genre_string_to_id():
     assert genre_string_to_id("Animation") == "16"
     assert genre_string_to_id("animation") == "16"
     assert genre_string_to_id("") == None
+
+def test_run_API():
+    assert run_API("two-thousand", None, None, None, None, None, None, None) == None
