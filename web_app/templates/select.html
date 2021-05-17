@@ -9,7 +9,7 @@
 
     <label for="genres">Choose a genre:</label>
 
-    <select name="genres" id="genres">
+    <select name="genre" id="genres">
       <option value="28">Action</option>
       <option value="12">Adventure</option>
       <option value="16">Animation</option>
@@ -30,16 +30,39 @@
       <option value="10752">War</option>
       <option value="37">Western</option> 
     </select>
-    genre_codes = {"genres":[{"id":28,"name":"Action"},
    
+    <label for="rating">Choose a rating:</label>
+
+    <select name="rating" id="rating">
+      <option value="R">R</option>
+      <option value="PG13">PG-13</option>
+      <option value="PG">PG</option>
+      <option value="G">G</option>
+    </select>
+
     <form action="/weather/forecast" method="POST">
 
-        <label>Country Code:</label>
-        <input type="text" name="country_code" placeholder="US" value="US">
+        <label>Minimum Movie Year:</label>
+        <input type="text" name="movie_min_year" placeholder="1980" value="1980">
         <br>
 
-        <label>Zip Code:</label>
-        <input type="text" name="zip_code" placeholder="20057" value="20057">
+        <label>Minimum Audience Rating</label>
+        <input type="text" name="vote_average" placeholder="7" value="7">
+        <br>
+
+        <label>Minimum Runtime (minutes) </label>
+        <input type="text" name="runtime_min" placeholder="150" value="150">
+
+        <label>Maximum Runtime </label>
+        <input type="text" name="runtime_max" placeholder="200" value="200">
+        <br>
+
+        <label>Your Name</label>
+        <input type="text" name="name" placeholder="Steve Buscemi" value="Steve Buscemi">
+        <br>
+
+        <label>Your Email Address</label>
+        <input type="text" name="email_address" placeholder="lilcaesars@aol.com" value="lilcaesars@aol.com">
         <br>
 
         <button>Submit</button>
