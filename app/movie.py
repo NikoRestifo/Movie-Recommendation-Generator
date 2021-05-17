@@ -58,35 +58,48 @@ tmdb.API_KEY='c4c3cb40b87c5d67f381e5bbdc3763ca'
 
 def format_movie_year_min(pick_movie_year_min):
     if bool(pick_movie_year_min) == True:
-        movie_year_min = str(pick_movie_year_min) + "-01-01"
+            movie_year_min = str(pick_movie_year_min) + "-01-01"
     else:
         movie_year_min = None
     return movie_year_min
 
+
 def format_vote_average(pick_vote_average):
-    if bool(pick_vote_average) == True:
-        vote_average = float(pick_vote_average)
-    else:
-        vote_average = None
+    try:
+        if bool(pick_vote_average) == True:
+            vote_average = float(pick_vote_average)
+        else:
+            vote_average = None
+    except(ValueError):
+        print("You entered an invalid value for the Minimum Movie Rating. Please try again")
+        quit()
     return vote_average
 
 def format_runtime_min(pick_runtime_min):
-    if bool(pick_runtime_min) == True:
-        runtime_min = int(pick_runtime_min)
-    else:
-        runtime_min = None
+    try:
+        if bool(pick_runtime_min) == True:
+            runtime_min = int(pick_runtime_min)
+        else:
+            runtime_min = None
+    except(ValueError):
+        print("You entered an invalid value for the Minimum Runtime. Please try again")
+        quit()  
     return runtime_min
 
 def format_runtime_max(pick_runtime_max):
-    if bool(pick_runtime_max) == True:
-        runtime_max = int(pick_runtime_max)
-    else:
-        runtime_max = None
+    try:
+        if bool(pick_runtime_max) == True:
+            runtime_max = int(pick_runtime_max)
+        else:
+            runtime_max = None
+    except(ValueError):
+        print("You entered an invalid value for the Maximum Runtime. Please try again")
+        quit()
     return runtime_max
 
 def format_movie_certification(pick_certification):
     if bool(pick_certification) == True:
-        movie_certification= str(pick_certification)
+        movie_certification= str(pick_certification).lower()
     else:
         movie_certification = None
     return movie_certification
@@ -95,7 +108,7 @@ def genre_string_to_id(pick_movie_genre):
     ids_list = []
     genre_select = genre_codes['genres']
     for genre in genre_select:
-        if genre['name'] == pick_movie_genre:
+        if genre['name'].lower() == pick_movie_genre.lower():
             genre_id = str(genre['id'])
             ids_list.append(genre_id)
             break
@@ -113,9 +126,13 @@ def run_API(movie_year_min, vote_average, runtime_min, runtime_max, movie_certif
     discover = tmdb.Discover()
     movie_ids = []
     for page_number in page_numbers:
+        #try:
         response = discover.movie(sort_by="popularity.desc", with_genres=genre_number, vote_average_gte=vote_average, 
         primary_release_year=None, primary_release_date_gte=movie_year_min, with_runtime_gte=runtime_min, with_runtime_lte=runtime_max, 
         certification_country="US", certification=movie_certification, page=page_number)
+        #except(AttributeError):
+            #print("ERRORS ALL AROUND!!!!!")
+            #quit()
         for value in response['results']:
             id = value['id']
             movie_ids.append(id)
@@ -124,10 +141,14 @@ def run_API(movie_year_min, vote_average, runtime_min, runtime_max, movie_certif
 
     n = 0
     while n<3:
-        movie_choice = random.choice(movie_ids)
-        movies_list.append(movie_choice)
-        movie_ids.remove(movie_choice)
-        n = n+1
+        try:
+            movie_choice = random.choice(movie_ids)
+            movies_list.append(movie_choice)
+            movie_ids.remove(movie_choice)
+            n = n+1
+        except(IndexError):
+            print("Data could not be retrieved. Please try again")
+            quit()
 
     todays_date = date.today().strftime('%A, %B %d, %Y')
     html = ""
@@ -173,6 +194,8 @@ def run_API(movie_year_min, vote_average, runtime_min, runtime_max, movie_certif
         html += "</ul>"
 
     send_email(subject="[Daily Briefing] Movie Time", html=html, recipient_address=RECIEVE_ADDRESS)
+
+
 
 
 
