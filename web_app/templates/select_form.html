@@ -3,23 +3,8 @@
 
 {% block content %}
 
-    <h2>Results for {{ results["name"] }}</h2>
+    <h2>Success! Email Sent!</h2>
 
-    <p>Genre: {{ movie_genre }}</p>
-    <p>Rating: {{ rating }}</p>
-    <p>Min Year: {{ movie_min_year }}</p>
-    <p>Vote: {{ vote_average }}</p>
-    <p>Min Runtime: {{ runtime_min }}</p>
-    <p>Max Runtime: {{ runtime_max }}</p>
-    <p>Email: {{ email_address }}</p>
-
-
-    <!-- TODO: consider using a table instead of a list -->
-    <!-- TODO: consider adding images using the provided icon urls -->
-    <ul>
-        {% for forecast in results["movies_list"] %}
-            <li>{{ forecast["movie_genre"] }} | {{ forecast["movie_year_min"] }} </li>
-        {% endfor %}
-    </ul>
+    <p> Revisit Select Page to send another suggestion list </p>
 
 {% endblock %}
