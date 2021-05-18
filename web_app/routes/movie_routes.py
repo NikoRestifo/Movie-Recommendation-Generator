@@ -12,40 +12,19 @@ from app.movie import format_movie_certification
 from app.movie import genre_string_to_id
 from app.movie import run_API
 
-@movie_routes.route("/select.json")
-def movie_forecast_api():
-    print("URL PARAMS:", dict(request.args))
-
-    if results:
-        return jsonify({"message":"Invalid Inputs. Please try again."}), 404
-    else:
-        return jsonify({"message":"Email Sent!"})
-
-@movie_routes.route("/select")
-def select_form():
-    print("MOVIE FORM...")
-    return render_template("select.html")
-#
 @movie_routes.route("/select/form", methods=["GET", "POST"])
 def movie_forecast():
-    print("WEATHER FORECAST...")
+    print("MOVIE FORECAST...")
 
     if request.method == "POST": # the form will send a POST
         print("FORM DATA:", dict(request.form))
         request_data = dict(request.form)
 
         movie_genre = request_data.get("genre")
-        #print(movie_genre)
-        #print(type(movie_genre))
-        #test
         vote_average = request_data.get("vote_average")
         movie_year_min = request_data.get("movie_min_year")
         runtime_min = request_data.get("runtime_min") 
-        print(runtime_min)
-        print(type(runtime_min))
         runtime_max = request_data.get("runtime_max")
-        print(runtime_max)
-        print(type(runtime_max))
         movie_certification = request_data.get("rating")
     
         USER_NAME = request_data.get("name")
