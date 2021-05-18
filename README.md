@@ -73,6 +73,13 @@ export FLASK_APP=web_app
 flask run
 ```
 
+To visit the website while runninig locally, enter the following into your browser:
+
+```sh
+http://127.0.0.1:5000/
+```
+
+
 ## Testing
 
 Running tests:
