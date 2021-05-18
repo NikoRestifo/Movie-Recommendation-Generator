@@ -55,7 +55,7 @@ CI_ENV="True"
 To run the code on your command line system, use the following command:
 
 ```sh
-python -m app.movie
+python -m app.main
 
 # in production mode:
 APP_ENV="production" python -m app.main
