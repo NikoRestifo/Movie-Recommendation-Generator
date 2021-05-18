@@ -7,7 +7,7 @@ This web application sends you a customized email with movie suggestions based o
 Currently, the web application is running on:
 
 ```sh
-https://movie-recommendation-generator.herokuapp.com/
+https://git.heroku.com/still-earth-03396.git
 ```
 
 ## Installation
