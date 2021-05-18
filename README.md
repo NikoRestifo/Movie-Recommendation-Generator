@@ -4,7 +4,7 @@ This web application sends you a customized email with movie suggestions based o
 
 ![](images/screenshot.png)
 
-Currently, the web application is running on:
+Once up and running, the web application will be running on:
 
 ```sh
 https://git.heroku.com/still-earth-03396.git
